@@ -4,8 +4,8 @@
 // Licensed under BSD License.
 
 
-// special case, remove iframe of dm5 page (not include the comic page)
-if (window.location.host==="www.dm5.com" && !(/^\/m/.test(window.location.pathname)))
+// special case, remove iframe of dm9 page (not include the comic page)
+if (window.location.host==="www.dm9.com" && !(/^\/m/.test(window.location.pathname)))
 {
     var ifs=document.getElementsByTagName("iframe");
     for(var i=ifs.length-1; i>=0; --i)
@@ -45,26 +45,26 @@ else
         getNextChapter;
 
     var parseEngine={
-        "dm5.com":function()
+        "dm9.com":function()
         {
             var url = window.location.href;
-            DM5_PAGE = 1;
+            DM9_PAGE = 1;
             if (url.indexOf('-p') > 0) {
-                DM5_PAGE = parseInt(url.substring(url.indexOf("-p") + 2), 10);
+                DM9_PAGE = parseInt(url.substring(url.indexOf("-p") + 2), 10);
             }
-            croot = DM5_CURL.substring(0, DM5_CURL.length - 1) + "-p";
+            croot = DM9_CURL.substring(0, DM9_CURL.length - 1) + "-p";
 
             var mkey = '';
-            if ($("#dm5_key").length > 0) {
-                mkey = $("#dm5_key").val();
+            if ($("#dm9_key").length > 0) {
+                mkey = $("#dm9_key").val();
             }
             getCurrentPage=function()
             {
-                return DM5_PAGE-1;
+                return DM9_PAGE-1;
             };
             getPageCount=function()
             {
-                return DM5_IMAGE_COUNT;
+                return DM9_IMAGE_COUNT;
             };
             getImgURL=function(thePage)
             {
@@ -72,7 +72,7 @@ else
 
                 $.ajax({
                         url: 'chapterimagefun.ashx',
-                        data: { cid: DM5_CID, page: thePage+1, language:1, key:mkey },
+                        data: { cid: DM9_CID, page: thePage+1, language:1, key:mkey },
                         type: 'GET',
                         async: false,
                         error: function (msg) {
@@ -90,7 +90,7 @@ else
             };
             setCurrentPage=function(thePage)
             {
-                DM5_PAGE = thePage+1;
+                DM9_PAGE = thePage+1;
             };
             getPageURL = function(thePage)
             {
@@ -101,7 +101,7 @@ else
             // var nurl=new String(window.location);
             // var cid=nurl.substring(nurl.indexOf("-")+1,nurl.indexOf("_"));
             // var nextUrl="../../tiaozhuan.aspx"+"?cid="+cid;
-            getNextChapter = function() { return {text:"", href:DM5_CURL_END}; };
+            getNextChapter = function() { return {text:"", href:DM9_CURL_END}; };
 
         }
         ,"u17.com":function()
